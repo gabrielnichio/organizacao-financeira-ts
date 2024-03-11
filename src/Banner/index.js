@@ -32,7 +32,7 @@ const Banner = () => {
                     </a>
                 </div>
             </div>
-            <img src={org}></img>
+            <img src={org} alt="imagem-organizacao"></img>
         </section>
     )
 }
