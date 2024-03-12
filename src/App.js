@@ -39,6 +39,11 @@ function App(props) {
     setInvestimentos([...listaInvestimentos, investimento]);
   }
 
+  const removerInvestimento = (id) => {
+    const investimentosComLinhaRemovida = listaInvestimentos.filter(investimento => investimento.id !== id);
+    setInvestimentos(investimentosComLinhaRemovida);
+  }
+
   return (
     <div className="App">
       <Banner />
@@ -49,7 +54,8 @@ function App(props) {
         label={tipo.nome}
         columnName={tipo.columnName}
         cor={tipo.color}
-        investimentos={listaInvestimentos.filter(investimento => investimento.tipo === tipo.nome)} 
+        investimentos={listaInvestimentos.filter(investimento => investimento.tipo === tipo.nome)}
+        removerInvestimento={removerInvestimento} 
       />)}
 
     </div>

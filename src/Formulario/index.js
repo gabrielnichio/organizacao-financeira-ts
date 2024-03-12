@@ -14,7 +14,11 @@ const Formulario = (props) => {
 
     const aoSalvar = (evento) => {
         evento.preventDefault();
+
+
+
         props.aoSubmeterInvestimentos({
+            id: Math.random().toFixed(2),
             nome,
             valor,
             quantidade,
@@ -37,6 +41,7 @@ const Formulario = (props) => {
                     placeholder='Digite aqui'
                     aoAlterado={valor => setNome(valor)}
                     obrigatorio={true}
+                    type="text"
                 />
                 <CampoTexto
                     label='Valor unitario' 
@@ -44,6 +49,7 @@ const Formulario = (props) => {
                     placeholder='Digite aqui'
                     aoAlterado={valor => setValor(valor)}
                     obrigatorio={true}
+                    type="number"
                 />
                 <CampoTexto
                     label='Quantidade'
@@ -51,6 +57,7 @@ const Formulario = (props) => {
                     placeholder='Digite aqui'
                     aoAlterado={valor => setQuantidade(valor)}
                     obrigatorio={true}
+                    type="number"
                 />
                 <ListaInvestimentos
                     label = 'Tipo'
