@@ -4,7 +4,6 @@ import github from "./images/github.png";
 import instagram from "./images/instagram.png";
 import "./Banner.css"
 
-
 const Banner = () => {
     return (
         <section className="banner">

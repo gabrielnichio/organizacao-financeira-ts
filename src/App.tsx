@@ -2,8 +2,9 @@ import { useState } from "react";
 import Banner from "./Banner";
 import Formulario from "./Formulario";
 import Tabela from "./Tabela";
+import { IInvestimentos } from "./Interfaces/IInvestimentos";
 
-function App(props) {
+function App() {
 
   const tiposIvestimentos = [
     {
@@ -33,13 +34,13 @@ function App(props) {
     }
   ];
 
-  const [listaInvestimentos, setInvestimentos] = useState([]);
+  const [listaInvestimentos, setInvestimentos] = useState<IInvestimentos[]>([]);
 
-  const cadastraInvestimentos = (investimento) => {
+  const cadastraInvestimentos = (investimento: IInvestimentos) => {
     setInvestimentos([...listaInvestimentos, investimento]);
   }
 
-  const removerInvestimento = (id) => {
+  const removerInvestimento = (id: string) => {
     const investimentosComLinhaRemovida = listaInvestimentos.filter(investimento => investimento.id !== id);
     setInvestimentos(investimentosComLinhaRemovida);
   }

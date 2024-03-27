@@ -1,18 +1,27 @@
 import './Tabela.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { IInvestimentos } from '../Interfaces/IInvestimentos';
+
+interface TabelaProps {
+    investimentos: IInvestimentos[];
+    cor: string;
+    label: string;
+    columnName: string;
+    removerInvestimento: (id: string) => void;
+}
 
 
-const Tabela = (props) => {
+const Tabela = ({ columnName, cor, investimentos, label, removerInvestimento }: TabelaProps) => {
 
 
     return (
-        (props.investimentos.length > 0) && <section className='tabela' style={{ backgroundColor: props.cor }}>
-            <h3>{props.label}</h3>
+        (investimentos.length > 0) && <section className='tabela' style={{ backgroundColor: cor }}>
+            <h3>{label}</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>{props.columnName}</th>
+                        <th>{columnName}</th>
                         <th>Valor unitário</th>
                         <th>Quantidade</th>
                         <th>Total</th>
@@ -20,9 +29,9 @@ const Tabela = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.investimentos.map(investimento => {
+                    {investimentos.map(investimento => {
 
-                        
+
 
                         return <tr key={investimento.id}>
                             <th>{investimento.nome}</th>
@@ -30,7 +39,7 @@ const Tabela = (props) => {
                             <td>{investimento.quantidade.replace(".", ",")}</td>
                             <td>R$ {(parseFloat(investimento.valor.replace(",", ".")) * parseFloat(investimento.quantidade.replace(",", "."))).toFixed(2).replace(".", ",")}</td>
                             <td>
-                                <button onClick={() => props.removerInvestimento(investimento.id)} title='Remover Investimento'>
+                                <button onClick={() => removerInvestimento(investimento.id)} title='Remover Investimento'>
                                     <FontAwesomeIcon icon={faTrashCan} />
                                 </button>
                             </td>
@@ -42,7 +51,7 @@ const Tabela = (props) => {
                         <th>Total Investido</th>
                         <td></td>
                         <td></td>
-                        <th>R$ {props.investimentos.reduce((accumulator, currentValue) => accumulator + parseFloat((parseFloat(currentValue.valor) * parseFloat(currentValue.quantidade)).toFixed(2)), 0)}</th>
+                        <th>R$ {investimentos.reduce((accumulator, currentValue) => accumulator + parseFloat((parseFloat(currentValue.valor) * parseFloat(currentValue.quantidade)).toFixed(2)), 0)}</th>
                     </tr>
                 </tfoot>
             </table>
