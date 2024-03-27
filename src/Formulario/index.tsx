@@ -3,18 +3,26 @@ import CampoTexto from '../CampoTexto';
 import './Formulario.css';
 import Botao from '../Botao';
 import ListaInvestimentos from '../ListaInvestimentos';
+import { IInvestimentos } from '../Interfaces/IInvestimentos';
 
-const Formulario = (props) => {
+interface FormularioProps {
+    aoSubmeterInvestimentos: (investimento: IInvestimentos) => void;
+    tipos: string[]
+}
+
+const Formulario = ({ aoSubmeterInvestimentos, tipos }: FormularioProps) => {
 
 
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
     const [quantidade, setQuantidade] = useState('');
-    const [tipo, setTipo] = useState(props.tipos[0]);
+    const [tipo, setTipo] = useState(tipos[0]);
 
-    const aoSalvar = (evento) => {
+    const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
-        props.aoSubmeterInvestimentos({
+
+        aoSubmeterInvestimentos({
+            id: Math.random().toFixed(2),
             nome,
             valor,
             quantidade,
@@ -37,13 +45,17 @@ const Formulario = (props) => {
                     placeholder='Digite aqui'
                     aoAlterado={valor => setNome(valor)}
                     obrigatorio={true}
+                    type="text"
+                    min='0'
                 />
                 <CampoTexto
-                    label='Valor unitario' 
+                    label='Valor unitario'
                     valor={valor}
                     placeholder='Digite aqui'
                     aoAlterado={valor => setValor(valor)}
                     obrigatorio={true}
+                    type="number"
+                    min='0'
                 />
                 <CampoTexto
                     label='Quantidade'
@@ -51,12 +63,14 @@ const Formulario = (props) => {
                     placeholder='Digite aqui'
                     aoAlterado={valor => setQuantidade(valor)}
                     obrigatorio={true}
+                    type="number"
+                    min='0'
                 />
                 <ListaInvestimentos
-                    label = 'Tipo'
-                    lista = {props.tipos}
-                    valor = {tipo}
-                    placeholder = "Selecione o tipo do investimento"
+                    label='Tipo'
+                    lista={tipos}
+                    valor={tipo}
+                    obrigatorio={true}
                     aoAlterado={valor => setTipo(valor)}
                 />
                 <Botao>

@@ -4,7 +4,6 @@ import github from "./images/github.png";
 import instagram from "./images/instagram.png";
 import "./Banner.css"
 
-
 const Banner = () => {
     return (
         <section className="banner">
@@ -32,7 +31,7 @@ const Banner = () => {
                     </a>
                 </div>
             </div>
-            <img src={org}></img>
+            <img src={org} alt="imagem-organizacao"></img>
         </section>
     )
 }
