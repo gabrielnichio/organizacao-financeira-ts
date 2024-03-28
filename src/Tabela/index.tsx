@@ -16,12 +16,13 @@ const Tabela = ({ columnName, cor, investimentos, label, removerInvestimento }: 
 
 
     return (
-        (investimentos.length > 0) && <section className='tabela' style={{ backgroundColor: cor }}>
+        (investimentos.length > 0) ? <section className='tabela' style={{ backgroundColor: cor }}>
             <h3>{label}</h3>
             <table>
                 <thead>
                     <tr>
                         <th>{columnName}</th>
+                        <th>Data aplicação</th>
                         <th>Valor unitário</th>
                         <th>Quantidade</th>
                         <th>Total</th>
@@ -31,10 +32,13 @@ const Tabela = ({ columnName, cor, investimentos, label, removerInvestimento }: 
                 <tbody>
                     {investimentos.map(investimento => {
 
+                        const dataLocal = new Date(`${investimento.data}T12:00:00Z`);
 
+                        const dataFormatada = dataLocal.toLocaleDateString();
 
                         return <tr key={investimento.id}>
                             <th>{investimento.nome}</th>
+                            <td>{dataFormatada}</td>
                             <td>R$ {parseFloat(investimento.valor).toFixed(2).replace(".", ",")}</td>
                             <td>{investimento.quantidade.replace(".", ",")}</td>
                             <td>R$ {(parseFloat(investimento.valor.replace(",", ".")) * parseFloat(investimento.quantidade.replace(",", "."))).toFixed(2).replace(".", ",")}</td>
@@ -51,11 +55,13 @@ const Tabela = ({ columnName, cor, investimentos, label, removerInvestimento }: 
                         <th>Total Investido</th>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <th>R$ {investimentos.reduce((accumulator, currentValue) => accumulator + parseFloat((parseFloat(currentValue.valor) * parseFloat(currentValue.quantidade)).toFixed(2)), 0)}</th>
+                        <td></td>
                     </tr>
                 </tfoot>
             </table>
-        </section>
+        </section> : <></>
     )
 }
 

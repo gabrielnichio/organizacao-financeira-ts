@@ -6,8 +6,9 @@ interface CampoTextoProps {
     label: string;
     valor: string;
     obrigatorio: boolean;
-    type: string;
-    min: string;
+    type?: "text" | "password" | "date" | "email" | "number";
+    min?: string;
+    step?: string;
 }
 
 const CampoTexto = ({ aoAlterado, label, obrigatorio, placeholder, type, valor, min }: CampoTextoProps) => {

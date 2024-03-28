@@ -5,4 +5,5 @@ export interface IInvestimentos {
     valor: string;
     quantidade: string;
     tipo: string;
+    data: string;
 }

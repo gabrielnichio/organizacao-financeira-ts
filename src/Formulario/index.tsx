@@ -17,6 +17,7 @@ const Formulario = ({ aoSubmeterInvestimentos, tipos }: FormularioProps) => {
     const [valor, setValor] = useState('');
     const [quantidade, setQuantidade] = useState('');
     const [tipo, setTipo] = useState(tipos[0]);
+    const [data, setData] = useState(tipos[0]);
 
     const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
@@ -26,7 +27,8 @@ const Formulario = ({ aoSubmeterInvestimentos, tipos }: FormularioProps) => {
             nome,
             valor,
             quantidade,
-            tipo
+            tipo,
+            data
         });
         setNome('')
         setValor('')
@@ -45,8 +47,6 @@ const Formulario = ({ aoSubmeterInvestimentos, tipos }: FormularioProps) => {
                     placeholder='Digite aqui'
                     aoAlterado={valor => setNome(valor)}
                     obrigatorio={true}
-                    type="text"
-                    min='0'
                 />
                 <CampoTexto
                     label='Valor unitario'
@@ -55,7 +55,7 @@ const Formulario = ({ aoSubmeterInvestimentos, tipos }: FormularioProps) => {
                     aoAlterado={valor => setValor(valor)}
                     obrigatorio={true}
                     type="number"
-                    min='0'
+                    step='0.01'
                 />
                 <CampoTexto
                     label='Quantidade'
@@ -65,6 +65,14 @@ const Formulario = ({ aoSubmeterInvestimentos, tipos }: FormularioProps) => {
                     obrigatorio={true}
                     type="number"
                     min='0'
+                />
+                <CampoTexto
+                    label='Data de aplicação'
+                    obrigatorio={true}
+                    placeholder='Digite aqui'
+                    valor={data}
+                    type="date"
+                    aoAlterado={valor => setData(valor)}
                 />
                 <ListaInvestimentos
                     label='Tipo'
